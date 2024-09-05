@@ -25,12 +25,16 @@ export class NoteService {
     return CreateNote.save();
   }
 
-  findAll() {
-    return `This action returns all note`;
+  async findAll(): Promise<Note[]>  {
+    const existingNotes = await this.noteModel.find().exec()
+    if (!existingNotes) {
+      throw new HttpException('No notes found', HttpStatus.NOT_FOUND);
+    }
+    return  existingNotes;
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} note`;
+  findOne(_id: number) {
+    return `This action returns a #${_id} note`;
   }
 
   update(id: number, updateNoteDto: UpdateNoteDto) {
