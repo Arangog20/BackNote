@@ -33,12 +33,22 @@ export class NoteService {
     return  existingNotes;
   }
 
-  findOne(_id: number) {
-    return `This action returns a #${_id} note`;
+  async findOne(_id: string): Promise<Note>{
+    const Note = await this.noteModel.findById(_id).exec();
+    if (!Note) {
+      throw new HttpException(`Note with id ${_id} not found`, HttpStatus.NOT_FOUND);
+    }
+    return Note;
   }
 
-  update(id: number, updateNoteDto: UpdateNoteDto) {
-    return `This action updates a #${id} note`;
+  async update(_id: string, updateNoteDto: UpdateNoteDto): Promise<Note> {
+    const UpdateNote = await this.noteModel
+    .findByIdAndUpdate(_id, updateNoteDto, { new: true })
+    .exec();
+    if (!UpdateNote) {
+      throw new HttpException(`Note with id ${_id} not found`, HttpStatus.NOT_FOUND);
+    }
+    return UpdateNote;
   }
 
   remove(id: number) {
