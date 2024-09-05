@@ -9,7 +9,7 @@ import dbconfig from './db-config';
     MongooseModule.forRootAsync({
       useFactory: (configService: ConfigType<typeof dbconfig>) => {
         const { db } = configService;
-        const uriDb = `mongodb+srv://${db.user}:${db.password}@${db.cluster}.mongodb.net/?retryWrites=true&w=majority&appName=Tvs`;
+        const uriDb = `mongodb+srv://${db.user}:${db.password}@${db.cluster}.mongodb.net/`;
         return {
           uri: uriDb,
         };
@@ -19,3 +19,4 @@ import dbconfig from './db-config';
   ],
 })
 export class PersistenceModule {}
+
