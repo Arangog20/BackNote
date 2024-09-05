@@ -9,7 +9,7 @@ import dbConfig from './db-config';
     MongooseModule.forRootAsync({
       useFactory: (configService: ConfigType<typeof dbConfig>) => {
         const { db } = configService;
-        const uriDb = `mongodb+srv://${db.user}:${db.password}@${db.cluster}.mongodb.net/`;
+        const uriDb = `mongodb+srv://${db.user}:${db.password}@${db.cluster}.mongodb.net/${db.name}?retryWrites=true&w=majority`;
         return {
           uri: uriDb,
         };

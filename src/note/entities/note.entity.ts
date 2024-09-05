@@ -3,9 +3,6 @@ import { Document } from 'mongoose';
 
 @Schema()
 export class Note extends Document {
-
-    @Prop({type: String, required: false, unique: true})
-    _id:string;
     
     @Prop ({required: true, type: String})
     title: string;
