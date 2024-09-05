@@ -1,14 +1,15 @@
 import { 
     IsDate,
     IsEmpty, 
+    IsNotEmpty, 
     IsString 
 } from "class-validator";
 
 export class CreateNoteDto {
 
-    @IsEmpty()
+    @IsNotEmpty()
     @IsString()
-    _id  : string;
+    _id: string;
 
     @IsEmpty()
     @IsString()

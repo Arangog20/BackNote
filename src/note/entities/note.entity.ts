@@ -1,11 +1,12 @@
 import { Prop, Schema, SchemaFactory } from "@nestjs/mongoose";
+import { Document } from 'mongoose';
 
 @Schema()
 export class Note extends Document {
-    
-    @Prop ({required: true, type: String})
-    _id  : string;
 
+    @Prop({type: String, required: false, unique: true})
+    _id:string;
+    
     @Prop ({required: true, type: String})
     title: string;
 

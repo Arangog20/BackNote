@@ -51,7 +51,11 @@ export class NoteService {
     return UpdateNote;
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} note`;
+  async remove(_id: string): Promise<void> {
+    
+    const note = await this.noteModel.findByIdAndDelete(  _id).exec(); 
+    if (!note) {
+      throw new HttpException(`Note with id ${_id} not found`, HttpStatus.NOT_FOUND);
+    }
   }
 }
